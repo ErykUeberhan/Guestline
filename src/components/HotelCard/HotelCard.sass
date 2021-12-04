@@ -1,0 +1,46 @@
+.hotelCard 
+    display: flex
+    flex-direction: column
+    width: 50%
+    border: 1px solid black
+    border-radius: 10px
+    margin-bottom: 50px
+    
+    &-header
+        display: flex
+        justify-content: space-between
+        align-items: flex-start
+        background: gray
+        height: 33%
+        width: 100%
+        border-top-left-radius: 10px
+        border-top-right-radius: 10px
+
+        &-images
+            border: 1px solid green
+            img 
+                max-height: 190px
+                // max-width: 100%
+        &-title
+            border: 1px solid yellow
+            flex: 1
+            padding: 10px
+
+    &-rooms
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        flex: 1
+        border: 5px solid pink
+        &-room
+            display: flex
+            align-items: center
+            border: 1px solid red
+            width: 100%
+            padding: 15px
+            box-sizing: border-box
+            &-name
+                min-width: 25%
+                border: 1px solid gray
+    

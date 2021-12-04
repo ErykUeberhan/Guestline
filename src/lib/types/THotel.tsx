@@ -1,4 +1,12 @@
-export interface IHotel {
+export type THotel = {
+    data: Hotel;
+}
+
+type Hotel = {
+    [index: number]: HotelInfo;
+}
+
+type HotelInfo = {
     address1: string;
     address2: string;
     checkInHours: number;
@@ -14,20 +22,20 @@ export interface IHotel {
     name: string;
     position: Position;
     postcode: string;
-    starRating: number;
+    starRating: string;
     telephone: string;
     town: string;
 }
 
-interface Facilities {
+type Facilities = {
     [index: number]: {case: number};
 }
 
-interface Images {
+type Images = {
     [index: number]: {url: string};
 }
 
-interface Position {
+type Position = {
     latitude: number;
     longitude: number;
     timezone: string;

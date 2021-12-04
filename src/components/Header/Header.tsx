@@ -1,9 +1,10 @@
 import React from 'react'
 
-function Header() {
+const Header: React.FC = () => {
+
     return (
         <div className="header">
-            
+            <img src={""}/>
         </div>
     )
 }
