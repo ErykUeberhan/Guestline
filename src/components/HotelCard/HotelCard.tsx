@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import GetRooms from '../../hooks/GetRooms';
 import './HotelCard.sass'
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 
 const HotelCard: React.FC<any> = (hotel: any) => {
     const [hotelState] = useState(hotel.hotel)
@@ -27,7 +28,10 @@ const HotelCard: React.FC<any> = (hotel: any) => {
                     </h3>
                 </div>
                 <div className='hotelCard-header-rating'>
-                    {hotelState.starRating}
+                    {
+                    Array(5).fill(0).map((e, i):any => (
+                        i < parseInt(hotelState.starRating) ? <AiFillStar/> : <AiOutlineStar/>
+                    ))}
                 </div>
                 
             </div>
@@ -37,7 +41,7 @@ const HotelCard: React.FC<any> = (hotel: any) => {
                     data?.data.rooms.map((element:any) => {
                         return <div className='hotelCard-rooms-room'>
                             <div className='hotelCard-rooms-room-name'>
-                                <h2>{element.name}</h2>
+                                <h2><b>{element.name}</b></h2>
                                 <h3>Adults: {element.occupancy.maxAdults}</h3>
                                 <h3>Children: {element.occupancy.maxChildren}</h3>
                             </div>

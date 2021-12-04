@@ -1,6 +1,7 @@
 import React from 'react'
 import GetHotels from '../../hooks/GetHotels'
 import HotelCard from '../HotelCard/HotelCard';
+import './List.sass'
 
 const List: React.FC = () => {
     const { isLoading, error , data } = GetHotels();
