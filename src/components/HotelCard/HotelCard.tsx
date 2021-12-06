@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
 import GetRooms from '../../hooks/GetRooms';
 import './HotelCard.sass'
-import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
+import { AiOutlineStar, AiFillStar, AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 
 const HotelCard: React.FC<any> = (hotel: any) => {
+    const [image, setImage] = useState<number>(0)
     const [hotelState] = useState(hotel.hotel)
-    console.log(hotelState)
     const { isLoading, error , data } = GetRooms(hotelState.id);
     if(error instanceof Error) return <h1>Error: {error?.message}, please reload page.</h1>;
     if(isLoading) return <h1>Loading ...</h1>;
-    console.log(data)
     return (
         <div className='hotelCard'>
             <div className='hotelCard-header'>
                 <div className='hotelCard-header-images'>
-                    <img src={hotelState.images[0].url} alt=""/>
+                    <AiOutlineArrowLeft className='hotelCard-header-images-leftArrow' onClick={()=>{image > 0 ? setImage(image-1) : setImage(hotelState.images.length-1)}}/>
+                    <img src={hotelState.images[image].url} alt={hotelState.images[image].alt}/>
+                    <AiOutlineArrowRight className='hotelCard-header-images-rightArrow' onClick={()=>{image < hotelState.images.length-1 ? setImage(image+1) : setImage(0)}}/>
                 </div>
                 <div className='hotelCard-header-title'>
                     <h2 className='hotelCard-header-title-text'>

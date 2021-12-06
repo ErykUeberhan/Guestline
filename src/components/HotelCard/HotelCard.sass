@@ -18,11 +18,23 @@
         border-top-right-radius: 10px
 
         &-images
+            display: flex
+            align-items: center
             img 
                 max-height: 190px
                 border-radius: 10px
-                // max-width: 100%
+            svg
+                height: 40px
+                width: 40px
+                color: white
+            &-leftArrow
+                position: absolute
+            &-rightArrow
+                margin-left: -40px
+
+
         &-title
+            margin-left: 20px
             flex: 1
             padding: 10px
 

@@ -10,6 +10,9 @@ const List: React.FC = () => {
     
     return (
         <div className='list'>
+            <div className='list-filter'>
+
+            </div>
             {
                 data?.data instanceof Array ?
                 data?.data?.map((element:any) => {
