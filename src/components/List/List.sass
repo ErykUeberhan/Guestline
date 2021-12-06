@@ -1,3 +1,5 @@
+@import '../styles/Variables.sass'
+    
 .list
     display: flex
     flex-direction: column
@@ -5,7 +7,44 @@
     align-items: center
     width: 100%
     &-filter
-        height: 40px
-        width: 500px
-        border: 1px solid black
+        display: flex
+        justify-content: space-evenly
+        align-items: center
+        font-size: 20px
         border-radius: 10px
+        border: 5px solid $pink
+        box-sizing: border-box
+        padding: 0px 40px
+        margin: -22px 0 50px 0
+        background-color: $darkBlue
+        &-rating
+            display: flex
+            justify-content: center
+            align-items: center
+            font-size: 26px
+            color: $blue
+
+        &-adults
+            display: flex
+            justify-content: space-between
+            align-items: center
+            margin: 0 30px
+            span
+                cursor: pointer
+                user-select: none
+            span, p
+                margin-left: 10px
+            p
+                color: $pink
+
+        &-children
+            display: flex
+            justify-content: space-between
+            align-items: center
+            span
+                cursor: pointer
+                user-select: none
+            span, p
+                margin-left: 10px
+            p
+                color: $pink

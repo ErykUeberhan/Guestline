@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { TRooms } from '../lib/types/TRooms';
 declare module 'axios' {
