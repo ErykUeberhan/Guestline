@@ -1,5 +1,5 @@
 export const initialState = {
-    rating: null,
+    rating: 1,
     adults: 0,
     children: 0,
 };

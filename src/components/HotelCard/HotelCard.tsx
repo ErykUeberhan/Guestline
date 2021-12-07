@@ -21,7 +21,6 @@ const HotelCard: React.FC<any> = (hotel: any) => {
             setRooms(false);
         }
     }, [rating, adults, children, data?.data.rooms, hotelState.starRating])
-        console.log(rating + " : "+ hotelState.starRating)
    
 
     if(error instanceof Error) return <h1>Error: {error?.message}, please reload page.</h1>;
@@ -50,7 +49,7 @@ const HotelCard: React.FC<any> = (hotel: any) => {
                 <div className='hotelCard-header-rating'>
                     {
                     Array(5).fill(0).map((e, i):any => (
-                        i < parseInt(hotelState.starRating) ? <AiFillStar/> : <AiOutlineStar/>
+                        i < parseInt(hotelState.starRating) ? <AiFillStar key={i}/> : <AiOutlineStar key={i}/>
                     ))}
                 </div>
                 
@@ -59,7 +58,7 @@ const HotelCard: React.FC<any> = (hotel: any) => {
                 {
                     data?.data.rooms instanceof Array ?
                     data?.data.rooms.map((element, index:any) => { return adults <= element.occupancy.maxAdults && children <= element.occupancy.maxChildren ?
-                         <div className='hotelCard-rooms-room'>
+                         <div key={index} className='hotelCard-rooms-room'>
                             <div className='hotelCard-rooms-room-name'>
                                 <h2><b>{element.name}</b></h2>
                                 <h3>Adults: {element.occupancy.maxAdults}</h3>

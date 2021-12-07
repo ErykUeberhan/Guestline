@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import GetHotels from '../../hooks/GetHotels'
 import HotelCard from '../HotelCard/HotelCard';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
@@ -18,7 +18,7 @@ const List: React.FC = () => {
                 <div className='list-filter-rating'>
                 {
                     Array(5).fill(0).map((e, i):any => (
-                        i+1 <= rating ? <AiFillStar onClick={()=>dispatch({ type: ACTIONS.RATING, payload: {rating: i+1}})}/> : <AiOutlineStar onClick={()=>dispatch({ type: ACTIONS.RATING, payload: {rating: i+1}})}/>
+                        i+1 <= rating ? <AiFillStar key={i} onClick={()=>dispatch({ type: ACTIONS.RATING, payload: {rating: i+1}})}/> : <AiOutlineStar key={i} onClick={()=>dispatch({ type: ACTIONS.RATING, payload: {rating: i+1}})}/>
                 ))
                 }
                 
@@ -39,8 +39,8 @@ const List: React.FC = () => {
             </div>
             {
                 data?.data instanceof Array ?
-                data?.data?.map((element:any) => {
-                    return <HotelCard hotel={element}/>
+                data?.data?.map((element, i:any) => {
+                    return <HotelCard key={i} hotel={element}/>
                 })
                 :
                 null
