@@ -1,13 +1,17 @@
 @import '../styles/Variables.sass'
     
 .footer
+    position: absolute
     display: flex
     justify-content: flex-end
     align-items: center
     width: 100%
     height: 60px
-    background-color: $blue
+    bottom: 0
+    box-sizing: border-box
+    background-image: linear-gradient($darkBlue, $blue)
     border-radius: 10px 10px 0 0 
     h1
+        color: $darkBlue
         font-size: 24px
         margin-right: 40px

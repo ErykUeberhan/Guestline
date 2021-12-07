@@ -1,16 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import GetRooms from '../../hooks/GetRooms';
 import './HotelCard.sass'
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from 'react-icons/md';
+import { useStateValue } from '../../StateProvider';
 
 const HotelCard: React.FC<any> = (hotel: any) => {
-    const [image, setImage] = useState<number>(0)
-    const [hotelState] = useState(hotel.hotel)
+    const [{rating, adults, children}]:any = useStateValue();
+    const [rooms, setRooms] = useState<boolean>(false)
+    const [image, setImage] = useState<number>(0);
+    const [hotelState] = useState(hotel.hotel);
     const { isLoading, error , data } = GetRooms(hotelState.id);
+
+    useEffect(() => {
+        if(data?.data.rooms instanceof Array)
+        data?.data.rooms.forEach((e)=>{
+            if(adults <= e.occupancy.maxAdults && children <= e.occupancy.maxChildren && rating <= hotelState.starRating) return setRooms(true);
+        })
+        return () => {
+            setRooms(false);
+        }
+    }, [rating, adults, children, data?.data.rooms, hotelState.starRating])
+        console.log(rating + " : "+ hotelState.starRating)
+   
+
     if(error instanceof Error) return <h1>Error: {error?.message}, please reload page.</h1>;
     if(isLoading) return <h1>Loading ...</h1>;
-    return (
+    
+    
+    return rooms ? (
         <div className='hotelCard'>
             <div className='hotelCard-header'>
                 <div className='hotelCard-header-images'>
@@ -40,8 +58,8 @@ const HotelCard: React.FC<any> = (hotel: any) => {
             <div className='hotelCard-rooms'>
                 {
                     data?.data.rooms instanceof Array ?
-                    data?.data.rooms.map((element:any) => {
-                        return <div className='hotelCard-rooms-room'>
+                    data?.data.rooms.map((element, index:any) => { return adults <= element.occupancy.maxAdults && children <= element.occupancy.maxChildren ?
+                         <div className='hotelCard-rooms-room'>
                             <div className='hotelCard-rooms-room-name'>
                                 <h2><b>{element.name}</b></h2>
                                 <h3>Adults: {element.occupancy.maxAdults}</h3>
@@ -51,6 +69,8 @@ const HotelCard: React.FC<any> = (hotel: any) => {
                                 {element.longDescription}
                             </div>
                         </div>
+                        :
+                        null
                     })
                     :
                     null
@@ -58,6 +78,8 @@ const HotelCard: React.FC<any> = (hotel: any) => {
             </div>
         </div>
     )
+    :
+    null
 }
 
 export default HotelCard
