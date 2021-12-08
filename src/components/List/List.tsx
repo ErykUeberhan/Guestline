@@ -18,22 +18,22 @@ const List: React.FC = () => {
                 <div className='list-filter-rating'>
                 {
                     Array(5).fill(0).map((e, i):any => (
-                        i+1 <= rating ? <AiFillStar key={i} onClick={()=>dispatch({ type: ACTIONS.RATING, payload: {rating: i+1}})}/> : <AiOutlineStar key={i} onClick={()=>dispatch({ type: ACTIONS.RATING, payload: {rating: i+1}})}/>
+                        i+1 <= rating ? <AiFillStar key={i} onClick={()=>dispatch({ type: ACTIONS.RATING, rating: i+1})}/> : <AiOutlineStar key={i} onClick={()=>dispatch({ type: ACTIONS.RATING, rating: i+1})}/>
                 ))
                 }
                 
                 </div>
                 <div className='list-filter-adults'>
                         <h4>Adults: </h4>
-                        <span onClick={() => dispatch({ type: ACTIONS.ADULTS, payload: {adults: adults+1}})}>+</span>
+                        <span onClick={() => dispatch({ type: ACTIONS.ADULTS, adults: adults+1})}>+</span>
                         <p>{adults}</p>
-                        <span onClick={() => {adults > 0 ? dispatch({ type: ACTIONS.ADULTS, payload: {adults: adults-1}}) : null!}}>-</span>
+                        <span onClick={() => {adults > 0 ? dispatch({ type: ACTIONS.ADULTS, adults: adults-1}) : null!}}>-</span>
                 </div>
                 <div className='list-filter-children'>
                         <h4>Children: </h4>
-                        <span onClick={() => dispatch({ type: ACTIONS.CHILDREN, payload: {children: children+1}})}>+</span>
+                        <span onClick={() => dispatch({ type: ACTIONS.CHILDREN, children: children+1})}>+</span>
                         <p>{children}</p>
-                        <span onClick={() => {children > 0 ? dispatch({ type: ACTIONS.CHILDREN, payload: {children: children-1}}) : null!}}>-</span>
+                        <span onClick={() => {children > 0 ? dispatch({ type: ACTIONS.CHILDREN, children: children-1}) : null!}}>-</span>
                 </div>
             
             </div>

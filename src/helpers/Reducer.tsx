@@ -1,7 +1,7 @@
 export const initialState = {
     rating: 1,
     adults: 0,
-    children: 0,
+    children: 0
 };
 
 export const ACTIONS = {
@@ -10,24 +10,37 @@ export const ACTIONS = {
     CHILDREN: 'children'
 }
 
-const reducer = (state:any, action:any) => {
+interface reducerStates {
+    rating: number,
+    adults: number,
+    children: number
+}
+
+interface reducerActions {
+    type: string,
+    rating: number,
+    adults: number,
+    children: number
+}
+
+const reducer = (state:reducerStates, action:reducerActions) => {
     switch(action.type){
         case ACTIONS.RATING: {
             return {
                 ...state,
-                rating: action.payload.rating,
+                rating: action.rating,
             }
         }
         case ACTIONS.ADULTS: {
             return {
                 ...state,
-                adults: action.payload.adults,
+                adults: action.adults,
             }
         }
         case ACTIONS.CHILDREN: {
             return {
                 ...state,
-                children: action.payload.children,
+                children: action.children,
             }
         }
         default:
