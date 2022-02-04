@@ -7,11 +7,11 @@ import { ACTIONS } from '../../helpers/Reducer';
 import { useStateValue } from '../../StateProvider';
 
 const List: React.FC = () => {
-    const [{rating, adults, children}, dispatch]:any = useStateValue()
+    const [{rating, adults, children, maxAdults}, dispatch]:any = useStateValue()
     const { isLoading, error , data } = GetHotels();
     if(error instanceof Error) return <h1>Error: {error?.message}, please reload page.</h1>;
     if(isLoading) return <h1>Loading ...</h1>;
-
+    
     return (
         <div className='list'>
             <div className='list-filter'>
@@ -23,9 +23,9 @@ const List: React.FC = () => {
                 }
                 
                 </div>
-                <div className='list-filter-adults'>
+                <div className='list-filter-adults' onClick={()=>console.log(data)}>
                         <h4>Adults: </h4>
-                        <span onClick={() => dispatch({ type: ACTIONS.ADULTS, adults: adults+1})}>+</span>
+                        <span onClick={() => {adults < maxAdults ? dispatch({ type: ACTIONS.ADULTS, adults: adults+1}) : null!}}>+</span>
                         <p>{adults}</p>
                         <span onClick={() => {adults > 0 ? dispatch({ type: ACTIONS.ADULTS, adults: adults-1}) : null!}}>-</span>
                 </div>

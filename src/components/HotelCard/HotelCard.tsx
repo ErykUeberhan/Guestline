@@ -4,17 +4,21 @@ import './HotelCard.sass'
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from 'react-icons/md';
 import { useStateValue } from '../../StateProvider';
+import { ACTIONS } from '../../helpers/Reducer';
 
 const HotelCard: React.FC<any> = (hotel: any) => {
-    const [{rating, adults, children}]:any = useStateValue();
+    const [{rating, adults, children}, dispatch]:any = useStateValue();
     const [rooms, setRooms] = useState<boolean>(false)
     const [image, setImage] = useState<number>(0);
     const [hotelState] = useState(hotel.hotel);
     const { isLoading, error , data } = GetRooms(hotelState.id);
-
+    console.log(rating," ", adults," ", children)
     useEffect(() => {
+        
         if(data?.data.rooms instanceof Array)
         data?.data.rooms.forEach((e)=>{
+            
+            dispatch({ type: ACTIONS.MAXADULTS, maxAdults: e.occupancy.maxAdults  })
             if(adults <= e.occupancy.maxAdults && children <= e.occupancy.maxChildren && rating <= hotelState.starRating) return setRooms(true);
         })
         return () => {
@@ -22,10 +26,9 @@ const HotelCard: React.FC<any> = (hotel: any) => {
         }
     }, [rating, adults, children, data?.data.rooms, hotelState.starRating])
    
-
+    
     if(error instanceof Error) return <h1>Error: {error?.message}, please reload page.</h1>;
     if(isLoading) return <h1>Loading ...</h1>;
-    
     
     return rooms ? (
         <div className='hotelCard'>
