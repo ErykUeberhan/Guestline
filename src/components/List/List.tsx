@@ -23,7 +23,7 @@ const List: React.FC = () => {
                 }
                 
                 </div>
-                <div className='list-filter-adults' onClick={()=>console.log(data)}>
+                <div className='list-filter-adults'>
                         <h4>Adults: </h4>
                         <span onClick={() => {adults < maxAdults ? dispatch({ type: ACTIONS.ADULTS, adults: adults+1}) : null!}}>+</span>
                         <p>{adults}</p>

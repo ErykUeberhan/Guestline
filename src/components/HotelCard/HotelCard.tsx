@@ -12,12 +12,11 @@ const HotelCard: React.FC<any> = (hotel: any) => {
     const [image, setImage] = useState<number>(0);
     const [hotelState] = useState(hotel.hotel);
     const { isLoading, error , data } = GetRooms(hotelState.id);
-    console.log(rating," ", adults," ", children)
+    
     useEffect(() => {
         
         if(data?.data.rooms instanceof Array)
         data?.data.rooms.forEach((e)=>{
-            
             dispatch({ type: ACTIONS.MAXADULTS, maxAdults: e.occupancy.maxAdults  })
             if(adults <= e.occupancy.maxAdults && children <= e.occupancy.maxChildren && rating <= hotelState.starRating) return setRooms(true);
         })
@@ -34,9 +33,9 @@ const HotelCard: React.FC<any> = (hotel: any) => {
         <div className='hotelCard'>
             <div className='hotelCard-header'>
                 <div className='hotelCard-header-images'>
-                    <MdOutlineArrowBackIos className='hotelCard-header-images-leftArrow' onClick={()=>{image > 0 ? setImage(image-1) : setImage(hotelState.images.length-1)}}/>
+                    <MdOutlineArrowBackIos className='hotelCard-header-images-leftArrow' data-testid='images-leftArrow' onClick={()=>{image > 0 ? setImage(image-1) : setImage(hotelState.images.length-1)}}/>
                     <img src={hotelState.images[image].url} alt={hotelState.images[image].alt}/>
-                    <MdOutlineArrowForwardIos className='hotelCard-header-images-rightArrow' onClick={()=>{image < hotelState.images.length-1 ? setImage(image+1) : setImage(0)}}/>
+                    <MdOutlineArrowForwardIos className='hotelCard-header-images-rightArrow' data-testid='images-rightArrow' onClick={()=>{image < hotelState.images.length-1 ? setImage(image+1) : setImage(0)}}/>
                 </div>
                 <div className='hotelCard-header-title'>
                     <h2 className='hotelCard-header-title-text'>
@@ -52,7 +51,7 @@ const HotelCard: React.FC<any> = (hotel: any) => {
                 <div className='hotelCard-header-rating'>
                     {
                     Array(5).fill(0).map((e, i):any => (
-                        i < parseInt(hotelState.starRating) ? <AiFillStar key={i}/> : <AiOutlineStar key={i}/>
+                        i < parseInt(hotelState.starRating) ? <AiFillStar data-testid='filledStar' key={i}/> : <AiOutlineStar data-testid='outlinedStar' key={i}/>
                     ))}
                 </div>
                 
